@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'add_passengar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,10 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      // home: const MyHomePage(title: 'e-Ticket'),
-      home: Scaffold(
-        body: PassengersList(),
-      ),
+      home: const MyHomePage(title: 'e-Ticket'),
     );
   }
 }
@@ -30,30 +30,92 @@ class PassengersList extends StatefulWidget {
 }
 
 class PassengersListState extends State<PassengersList> {
-  List<String> passengerList = ['Sam', 'ules'];
+  List<Passenger> passengerList = [];
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ElevatedButton(
-          onPressed: () {
-            passengerList.add('Added');
-            setState(() {});
-          },
-          child: Text('Sam'),
-        ),
-        Expanded(
-          child: ListView.builder(
-            itemCount: passengerList.length,
-            itemBuilder: (_, index) {
-              return Text('Sam');
+    return Expanded(
+      child: Column(
+        children: [
+          ElevatedButton(
+            onPressed: () async {
+              var res = await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => AddPassengerPage(),
+                ),
+              );
+              passengerList.add(res);
+              setState(() {});
             },
+            child: Text('Add Passengar'),
           ),
-        ),
-      ],
+          Expanded(
+            child: ListView.builder(
+              itemCount: passengerList.length,
+              itemBuilder: (_, index) {
+                return Container(
+                  margin: EdgeInsets.all(10),
+                  child: Row(
+                    children: [
+                      Flexible(
+                        child: Text(passengerList[index].gender.toString()),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Flexible(
+                        child: Text(passengerList[index].passengerFirstName),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Flexible(
+                        child: Text(passengerList[index].passengerLastName),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          passengerList.removeAt(index);
+                          setState(() {});
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 5),
+                          child: Text('Remove'),
+                        ),
+                      )
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
+}
+
+class Passenger {
+  static const MALE = 'M';
+  static const FEMALE = 'F';
+
+  final String passengerFirstName;
+  final String passengerLastName;
+  final String gender;
+
+  Passenger({
+    required this.passengerFirstName,
+    required this.passengerLastName,
+    required this.gender,
+  });
 }
 
 class MyHomePage extends StatefulWidget {
@@ -133,21 +195,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 hintText: 'Name',
               ),
             ),
-            ElevatedButton(
-              onPressed: () {
-                showDatePicker(
-                        context: context,
-                        // initialDate: _dateTime == null ? DateTime.now() : _dateTime,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime.now(),
-                        lastDate: DateTime(2030))
-                    .then((date) {
-                  setState(() {
-                    // _dateTime = date;
-                  });
-                });
-              },
-              child: Text('sam'),
+            Flexible(
+              flex: 2,
+              child: PassengersList(),
             ),
             TextFormField(
               onTap: () {
