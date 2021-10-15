@@ -1,7 +1,6 @@
+import 'package:dope_ticket/passenger_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'add_passengar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,102 +21,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class PassengersList extends StatefulWidget {
-  PassengersList({Key? key}) : super(key: key);
-
-  @override
-  PassengersListState createState() => PassengersListState();
-}
-
-class PassengersListState extends State<PassengersList> {
-  List<Passenger> passengerList = [];
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        children: [
-          ElevatedButton(
-            onPressed: () async {
-              var res = await Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => AddPassengerPage(),
-                ),
-              );
-              passengerList.add(res);
-              setState(() {});
-            },
-            child: Text('Add Passengar'),
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: passengerList.length,
-              itemBuilder: (_, index) {
-                return Container(
-                  margin: EdgeInsets.all(10),
-                  child: Row(
-                    children: [
-                      Flexible(
-                        child: Text(passengerList[index].gender.toString()),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Flexible(
-                        child: Text(passengerList[index].passengerFirstName),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Flexible(
-                        child: Text(passengerList[index].passengerLastName),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          passengerList.removeAt(index);
-                          setState(() {});
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 5),
-                          child: Text('Remove'),
-                        ),
-                      )
-                    ],
-                  ),
-                );
-              },
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class Passenger {
-  static const MALE = 'M';
-  static const FEMALE = 'F';
-
-  final String passengerFirstName;
-  final String passengerLastName;
-  final String gender;
-
-  Passenger({
-    required this.passengerFirstName,
-    required this.passengerLastName,
-    required this.gender,
-  });
-}
-
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
 
@@ -136,109 +39,157 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Container(
         margin: EdgeInsets.all(15),
-        child: ListView(
-          children: [
-            AirLines(
-              UniqueKey(),
-            ),
-            Row(
-              children: [
-                SizedBox(
-                  width: 20,
-                ),
-                Text(
-                  'GoAir',
-                  style: TextStyle(
-                    fontSize: 15,
-                  ),
-                ),
-                SizedBox(
-                  width: 20,
-                ),
-                Container(
-                  width: 150,
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      hintText: 'Flight No.',
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                SizedBox(
-                  width: 20,
-                ),
-                Text(
-                  'Indigo',
-                  style: TextStyle(
-                    fontSize: 15,
-                  ),
-                ),
-                SizedBox(
-                  width: 20,
-                ),
-                Container(
-                  width: 150,
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      hintText: 'Flight No.',
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            //===============
-            TextFormField(
-              decoration: InputDecoration(
-                hintText: 'Name',
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              AirLines(
+                UniqueKey(),
               ),
-            ),
-            Flexible(
-              flex: 2,
-              child: PassengersList(),
-            ),
-            TextFormField(
-              onTap: () {
-                showDatePicker(
-                        context: context,
-                        // initialDate: _dateTime == null ? DateTime.now() : _dateTime,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime.now(),
-                        lastDate: DateTime(2030))
-                    .then((date) {
-                  setState(() {
-                    // _dateTime = date;
+              Row(
+                children: [
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Text(
+                    'GoAir',
+                    style: TextStyle(
+                      fontSize: 15,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Container(
+                    width: 150,
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        hintText: 'Flight No.',
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Text(
+                    'Indigo',
+                    style: TextStyle(
+                      fontSize: 15,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Container(
+                    width: 150,
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        hintText: 'Flight No.',
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              //===============
+              TextFormField(
+                decoration: InputDecoration(
+                  hintText: 'Name',
+                ),
+              ),
+              PassengersList(),
+              TextFormField(
+                onTap: () {
+                  showDatePicker(
+                          context: context,
+                          // initialDate: _dateTime == null ? DateTime.now() : _dateTime,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime.now(),
+                          lastDate: DateTime(2030))
+                      .then((date) {
+                    setState(() {
+                      // _dateTime = date;
+                    });
                   });
-                });
-              },
-              decoration: InputDecoration(
-                hintText: 'Date of birth',
+                },
+                decoration: InputDecoration(
+                  hintText: 'Date of birth',
+                ),
               ),
-            ),
-            Row(
-              children: [
-                Flexible(
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      hintText: 'PNR',
+              Row(
+                children: [
+                  Flexible(
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        hintText: 'PNR',
+                      ),
                     ),
                   ),
-                ),
-                Flexible(
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      hintText: 'Ticket no',
+                  Flexible(
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        hintText: 'Ticket no',
+                      ),
                     ),
                   ),
+                ],
+              ),
+              Row(
+                children: [
+                  Flexible(
+                    child: TextFormField(
+                      onTap: () {
+                        showDatePicker(
+                                context: context,
+                                // initialDate: _dateTime == null ? DateTime.now() : _dateTime,
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime.now(),
+                                lastDate: DateTime(2030))
+                            .then((date) {
+                          setState(() {
+                            // _dateTime = date;
+                          });
+                        });
+                      },
+                      decoration: InputDecoration(
+                        hintText: 'Date',
+                      ),
+                    ),
+                  ),
+                  Flexible(
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        hintText: 'Timings',
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Refundable(UniqueKey()),
+              Text(
+                'Baggage',
+                style: TextStyle(
+                  fontSize: 20,
                 ),
-              ],
-            ),
-            Row(
-              children: [
-                Flexible(
-                  child: TextFormField(
+              ),
+              Baggage(
+                UniqueKey(),
+              ),
+              Column(
+                children: [
+                  TextFormField(
+                    decoration: InputDecoration(
+                      hintText: 'Booking Id',
+                    ),
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      hintText: 'Reference no',
+                    ),
+                  ),
+                  TextFormField(
                     onTap: () {
                       showDatePicker(
                               context: context,
@@ -253,67 +204,18 @@ class _MyHomePageState extends State<MyHomePage> {
                       });
                     },
                     decoration: InputDecoration(
-                      hintText: 'Date',
+                      hintText: 'Booking Date',
                     ),
                   ),
-                ),
-                Flexible(
-                  child: TextFormField(
+                  TextFormField(
                     decoration: InputDecoration(
-                      hintText: 'Timings',
+                      hintText: 'Grand Total',
                     ),
                   ),
-                ),
-              ],
-            ),
-            Refundable(UniqueKey()),
-            Text(
-              'Baggage',
-              style: TextStyle(
-                fontSize: 20,
+                ],
               ),
-            ),
-            Baggage(
-              UniqueKey(),
-            ),
-            Column(
-              children: [
-                TextFormField(
-                  decoration: InputDecoration(
-                    hintText: 'Booking Id',
-                  ),
-                ),
-                TextFormField(
-                  decoration: InputDecoration(
-                    hintText: 'Reference no',
-                  ),
-                ),
-                TextFormField(
-                  onTap: () {
-                    showDatePicker(
-                            context: context,
-                            // initialDate: _dateTime == null ? DateTime.now() : _dateTime,
-                            initialDate: DateTime.now(),
-                            firstDate: DateTime.now(),
-                            lastDate: DateTime(2030))
-                        .then((date) {
-                      setState(() {
-                        // _dateTime = date;
-                      });
-                    });
-                  },
-                  decoration: InputDecoration(
-                    hintText: 'Booking Date',
-                  ),
-                ),
-                TextFormField(
-                  decoration: InputDecoration(
-                    hintText: 'Grand Total',
-                  ),
-                ),
-              ],
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

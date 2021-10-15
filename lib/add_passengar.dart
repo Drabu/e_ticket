@@ -1,7 +1,6 @@
+import 'package:dope_ticket/passenger_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'main.dart';
 
 class AddPassengerPage extends StatefulWidget {
   const AddPassengerPage();
