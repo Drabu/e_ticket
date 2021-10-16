@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class AirLines extends StatefulWidget {
-  const AirLines(GlobalKey key) : super(key: key);
+  const AirLines({required GlobalKey key}) : super(key: key);
 
   @override
   AirLinesState createState() => AirLinesState();
 }
 
 class AirLinesState extends State<AirLines> {
-  int _value = 0;
+  String _value = 'One Way';
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +24,10 @@ class AirLinesState extends State<AirLines> {
               fontSize: 21,
             ),
           ),
-          RadioListTile<int>(
+          RadioListTile<String>(
+            selected: true,
             title: const Text('One Way'),
-            value: 1,
+            value: 'One Way',
             groupValue: _value,
             onChanged: (val) {
               setState(() {
@@ -34,9 +35,9 @@ class AirLinesState extends State<AirLines> {
               });
             },
           ),
-          RadioListTile<int>(
+          RadioListTile<String>(
             title: const Text('Return'),
-            value: 2,
+            value: 'Return',
             groupValue: _value,
             onChanged: (val) {
               setState(() {

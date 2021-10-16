@@ -8,7 +8,7 @@ class Baggage extends StatefulWidget {
 }
 
 class BaggageState extends State<Baggage> {
-  int _value = 0;
+  int _value = 15;
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +25,9 @@ class BaggageState extends State<Baggage> {
           ),
         ),
         RadioListTile<int>(
+          selected: true,
           title: const Text('15 Kg'),
-          value: 1,
+          value: 15,
           groupValue: _value,
           onChanged: (val) {
             setState(() {
@@ -36,7 +37,7 @@ class BaggageState extends State<Baggage> {
         ),
         RadioListTile<int>(
           title: const Text('20 Kg'),
-          value: 2,
+          value: 20,
           groupValue: _value,
           onChanged: (val) {
             setState(() {
@@ -46,7 +47,7 @@ class BaggageState extends State<Baggage> {
         ),
         RadioListTile<int>(
           title: const Text('25 Kg'),
-          value: 3,
+          value: 25,
           groupValue: _value,
           onChanged: (val) {
             setState(() {
@@ -56,7 +57,7 @@ class BaggageState extends State<Baggage> {
         ),
         RadioListTile<int>(
           title: const Text('30 Kg'),
-          value: 4,
+          value: 30,
           groupValue: _value,
           onChanged: (val) {
             setState(() {

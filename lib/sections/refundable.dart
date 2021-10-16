@@ -8,7 +8,7 @@ class Refundable extends StatefulWidget {
 }
 
 class RefundableState extends State<Refundable> {
-  int _value = 0;
+  String _value = 'Non Refunded';
 
   @override
   Widget build(BuildContext context) {
@@ -17,43 +17,57 @@ class RefundableState extends State<Refundable> {
         top: 10,
         bottom: 10,
       ),
-      child: Row(
-        children: <Widget>[
-          Flexible(
-            flex: 2,
-            child: RadioListTile<int>(
-              title: const Text(
-                'Refund',
-                style: TextStyle(
-                  fontSize: 15,
-                ),
+      child: Column(
+        children: [
+          Container(
+            alignment: Alignment.topLeft,
+            child: Text(
+              'Refundable',
+              style: TextStyle(
+                fontSize: 20,
               ),
-              value: 1,
-              groupValue: _value,
-              onChanged: (val) {
-                setState(() {
-                  _value = val!;
-                });
-              },
             ),
           ),
-          Flexible(
-            flex: 3,
-            child: RadioListTile<int>(
-              title: const Text(
-                'Non Refunded',
-                style: TextStyle(
-                  fontSize: 15,
+          Row(
+            children: <Widget>[
+              Flexible(
+                flex: 2,
+                child: RadioListTile<String>(
+                  title: const Text(
+                    'Refund',
+                    style: TextStyle(
+                      fontSize: 15,
+                    ),
+                  ),
+                  value: 'Refund',
+                  groupValue: _value,
+                  onChanged: (val) {
+                    setState(() {
+                      _value = val!;
+                    });
+                  },
                 ),
               ),
-              value: 2,
-              groupValue: _value,
-              onChanged: (val) {
-                setState(() {
-                  _value = val!;
-                });
-              },
-            ),
+              Flexible(
+                flex: 3,
+                child: RadioListTile<String>(
+                  selected: true,
+                  title: const Text(
+                    'Non Refunded',
+                    style: TextStyle(
+                      fontSize: 15,
+                    ),
+                  ),
+                  value: 'Non Refunded',
+                  groupValue: _value,
+                  onChanged: (val) {
+                    setState(() {
+                      _value = val!;
+                    });
+                  },
+                ),
+              ),
+            ],
           ),
         ],
       ),

@@ -56,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             children: [
               AirLines(
-                _airlineKey,
+                key: _airlineKey,
               ),
               AirLineType(
                 key: _airlineTypeKey,
@@ -81,6 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       onPressed: () {
                         print(_bookingDetailsKey.currentState!.validate.toString());
                         print(_ticketHolderKey.currentState!.validate.toString());
+                        print(_airlineTypeKey.currentState!.validate.toString());
                       },
                       child: Text('Submit'),
                     ),
