@@ -1,11 +1,11 @@
 import 'package:dope_ticket/sections/booking_details.dart';
-import 'package:dope_ticket/sections/refundable.dart';
+import 'package:dope_ticket/widgets/refundable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'sections/airline_type.dart';
-import 'sections/airlines.dart';
-import 'sections/baggage.dart';
+import 'widgets/airlines.dart';
+import 'widgets/baggage.dart';
 import 'sections/info_section.dart';
 
 void main() {
@@ -73,20 +73,23 @@ class _MyHomePageState extends State<MyHomePage> {
               BookingDetails(
                 key: _bookingDetailsKey,
               ),
-              Row(
-                children: [
-                  Expanded(
-                    flex: 1,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        print(_bookingDetailsKey.currentState!.validate.toString());
-                        print(_ticketHolderKey.currentState!.validate.toString());
-                        print(_airlineTypeKey.currentState!.validate.toString());
-                      },
-                      child: Text('Submit'),
+              Container(
+                margin: EdgeInsets.only(top: 10, bottom: 10),
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          print(_bookingDetailsKey.currentState!.validate.toString());
+                          print(_ticketHolderKey.currentState!.validate.toString());
+                          print(_airlineTypeKey.currentState!.validate.toString());
+                        },
+                        child: Text('Submit'),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               )
             ],
           ),

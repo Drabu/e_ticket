@@ -7,7 +7,6 @@ class AirLineType extends StatefulWidget {
 
   final _goAirController = TextEditingController();
   final _indoGoController = TextEditingController();
-
   final _formKey = GlobalKey<FormState>();
 
   @override

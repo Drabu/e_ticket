@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:dope_ticket/commons/default_validator.dart';
-import 'package:dope_ticket/sections/passenger_widget.dart';
+import 'package:dope_ticket/widgets/passenger_widget.dart';
 
 import '../commons/date_picker.dart';
 

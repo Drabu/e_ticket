@@ -1,30 +1,30 @@
 import 'package:dope_ticket/commons/default_validator.dart';
-import 'package:dope_ticket/sections/passenger_widget.dart';
+import 'package:dope_ticket/widgets/passenger_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AddPassengerPage extends StatefulWidget {
-  const AddPassengerPage();
+  final Map<String, Widget> _map = new Map();
+  final _firstNameController = TextEditingController();
+  final _lastNameController = TextEditingController();
+  final _formState = GlobalKey<FormState>();
 
   @override
   _AddPassengerPageState createState() => _AddPassengerPageState();
 }
 
 class _AddPassengerPageState extends State<AddPassengerPage> {
-  Map<String, Widget> map = new Map();
-  final firstNameController = TextEditingController();
-  final lastNameController = TextEditingController();
   String currentValue = Passenger.MALE;
 
   @override
   void initState() {
     super.initState();
 
-    map.putIfAbsent(
+    widget._map.putIfAbsent(
       Passenger.MALE,
       () => Text('Male'),
     );
-    map.putIfAbsent(
+    widget._map.putIfAbsent(
       Passenger.FEMALE,
       () => Text('Female'),
     );
@@ -37,6 +37,7 @@ class _AddPassengerPageState extends State<AddPassengerPage> {
         title: Text('Add New Passengar'),
       ),
       body: Form(
+        key: widget._formState,
         child: Container(
           alignment: Alignment.topLeft,
           child: Column(
@@ -45,14 +46,14 @@ class _AddPassengerPageState extends State<AddPassengerPage> {
             children: [
               TextFormField(
                 validator: defaultValidator,
-                controller: firstNameController,
+                controller: widget._firstNameController,
                 decoration: InputDecoration(
                   hintText: 'Passenger First Name',
                 ),
               ),
               TextFormField(
                 validator: defaultValidator,
-                controller: lastNameController,
+                controller: widget._lastNameController,
                 decoration: InputDecoration(
                   hintText: 'Passenger Last Name',
                 ),
@@ -65,7 +66,7 @@ class _AddPassengerPageState extends State<AddPassengerPage> {
                 children: [
                   Expanded(
                     child: CupertinoSegmentedControl<String>(
-                      children: map,
+                      children: widget._map,
                       groupValue: currentValue,
                       onValueChanged: (val) {
                         setState(() {
@@ -83,11 +84,12 @@ class _AddPassengerPageState extends State<AddPassengerPage> {
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.of(context).pop(Passenger(
-                          gender: currentValue,
-                          passengerFirstName: firstNameController.text,
-                          passengerLastName: lastNameController.text,
-                        ));
+                        if (widget._formState.currentState?.validate() ?? false)
+                          Navigator.of(context).pop(Passenger(
+                            gender: currentValue,
+                            passengerFirstName: widget._firstNameController.text,
+                            passengerLastName: widget._lastNameController.text,
+                          ));
                       },
                       child: Text('Add Passenger'),
                     ),
