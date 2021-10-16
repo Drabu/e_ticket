@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'package:dope_ticket/sections/booking_details.dart';
 import 'package:dope_ticket/widgets/refundable.dart';
-
 import 'commons/labels.dart';
 import 'models/e_ticket_model.dart';
 import 'sections/airline_type.dart';
@@ -118,4 +116,3 @@ class MyHomePage extends StatelessWidget {
 
   bool notNull(dynamic val) => val != null;
 }
-
