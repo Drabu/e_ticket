@@ -1,3 +1,5 @@
+import 'package:dope_ticket/commons/labels.dart';
+
 import '../routes/add_passengar.dart';
 
 import 'package:flutter/cupertino.dart';
@@ -35,7 +37,7 @@ class PassengersListState extends State<PassengersList> {
               passengerList.add(res);
               setState(() {});
             },
-            child: Text('Add Passengar'),
+            child: Text(L.add_new_passenger),
           ),
         ),
         ...passengerList.map((e) {

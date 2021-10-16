@@ -1,4 +1,5 @@
 import 'package:dope_ticket/commons/default_validator.dart';
+import 'package:dope_ticket/commons/labels.dart';
 import 'package:flutter/material.dart';
 
 import '../commons/date_picker.dart';
@@ -29,15 +30,11 @@ class BookkingDetailsState extends State<BookingDetails> {
             children: [
               TextFormField(
                 validator: defaultValidator,
-                decoration: InputDecoration(
-                  hintText: 'Booking Id',
-                ),
+                decoration: InputDecoration(hintText: L.booking_id),
               ),
               TextFormField(
                 validator: defaultValidator,
-                decoration: InputDecoration(
-                  hintText: 'Reference no',
-                ),
+                decoration: InputDecoration(hintText: L.refference_no),
               ),
               TextFormField(
                 validator: defaultValidator,
@@ -57,14 +54,14 @@ class BookkingDetailsState extends State<BookingDetails> {
                   );
                 },
                 decoration: InputDecoration(
-                  hintText: 'Booking Date',
+                  hintText: L.booking_date,
                 ),
               ),
               TextFormField(
                 validator: defaultValidator,
                 controller: _grandTotalController,
                 decoration: InputDecoration(
-                  hintText: 'Grand Total',
+                  hintText: L.grand_total,
                 ),
               ),
             ],

@@ -1,3 +1,4 @@
+import 'package:dope_ticket/commons/labels.dart';
 import 'package:flutter/material.dart';
 
 import 'package:dope_ticket/commons/default_validator.dart';
@@ -26,7 +27,7 @@ class AirLineTypeState extends State<AirLineType> {
                 width: 20,
               ),
               Text(
-                'GoAir',
+                L.go_air,
                 style: TextStyle(
                   fontSize: 15,
                 ),
@@ -40,7 +41,7 @@ class AirLineTypeState extends State<AirLineType> {
                   controller: widget._goAirController,
                   validator: defaultValidator,
                   decoration: InputDecoration(
-                    hintText: 'Flight No.',
+                    hintText: L.flight_no,
                   ),
                 ),
               ),
@@ -52,7 +53,7 @@ class AirLineTypeState extends State<AirLineType> {
                 width: 20,
               ),
               Text(
-                'Indigo',
+                L.indigo,
                 style: TextStyle(
                   fontSize: 15,
                 ),
@@ -66,7 +67,7 @@ class AirLineTypeState extends State<AirLineType> {
                   controller: widget._indoGoController,
                   validator: defaultValidator,
                   decoration: InputDecoration(
-                    hintText: 'Flight No.',
+                    hintText: L.flight_no,
                   ),
                 ),
               ),

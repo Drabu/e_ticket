@@ -1,3 +1,4 @@
+import 'package:dope_ticket/commons/labels.dart';
 import 'package:flutter/material.dart';
 
 class Refundable extends StatefulWidget {
@@ -8,7 +9,7 @@ class Refundable extends StatefulWidget {
 }
 
 class RefundableState extends State<Refundable> {
-  String _value = 'Non Refunded';
+  String _value = L.non_refunded;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class RefundableState extends State<Refundable> {
           Container(
             alignment: Alignment.topLeft,
             child: Text(
-              'Refundable',
+              L.refundable,
               style: TextStyle(
                 fontSize: 20,
               ),
@@ -34,12 +35,12 @@ class RefundableState extends State<Refundable> {
                 flex: 2,
                 child: RadioListTile<String>(
                   title: const Text(
-                    'Refund',
+                    L.refund,
                     style: TextStyle(
                       fontSize: 15,
                     ),
                   ),
-                  value: 'Refund',
+                  value: L.refund,
                   groupValue: _value,
                   onChanged: (val) {
                     setState(() {
@@ -53,12 +54,12 @@ class RefundableState extends State<Refundable> {
                 child: RadioListTile<String>(
                   selected: true,
                   title: const Text(
-                    'Non Refunded',
+                    L.non_refunded,
                     style: TextStyle(
                       fontSize: 15,
                     ),
                   ),
-                  value: 'Non Refunded',
+                  value: L.non_refunded,
                   groupValue: _value,
                   onChanged: (val) {
                     setState(() {
@@ -73,4 +74,6 @@ class RefundableState extends State<Refundable> {
       ),
     );
   }
+
+  String? get validate => _value;
 }

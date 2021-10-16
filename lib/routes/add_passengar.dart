@@ -1,4 +1,5 @@
 import 'package:dope_ticket/commons/default_validator.dart';
+import 'package:dope_ticket/commons/labels.dart';
 import 'package:dope_ticket/widgets/passenger_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -22,11 +23,11 @@ class _AddPassengerPageState extends State<AddPassengerPage> {
 
     widget._map.putIfAbsent(
       Passenger.MALE,
-      () => Text('Male'),
+      () => Text(L.male),
     );
     widget._map.putIfAbsent(
       Passenger.FEMALE,
-      () => Text('Female'),
+      () => Text(L.female),
     );
   }
 
@@ -34,7 +35,7 @@ class _AddPassengerPageState extends State<AddPassengerPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add New Passengar'),
+        title: Text(L.add_new_passenger),
       ),
       body: Form(
         key: widget._formState,
@@ -48,14 +49,14 @@ class _AddPassengerPageState extends State<AddPassengerPage> {
                 validator: defaultValidator,
                 controller: widget._firstNameController,
                 decoration: InputDecoration(
-                  hintText: 'Passenger First Name',
+                  hintText: L.first_name,
                 ),
               ),
               TextFormField(
                 validator: defaultValidator,
                 controller: widget._lastNameController,
                 decoration: InputDecoration(
-                  hintText: 'Passenger Last Name',
+                  hintText: L.last_name,
                 ),
               ),
               SizedBox(
@@ -91,7 +92,7 @@ class _AddPassengerPageState extends State<AddPassengerPage> {
                             passengerLastName: widget._lastNameController.text,
                           ));
                       },
-                      child: Text('Add Passenger'),
+                      child: Text(L.add_passenger),
                     ),
                   ),
                 ],

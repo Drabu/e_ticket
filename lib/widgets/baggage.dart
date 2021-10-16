@@ -1,3 +1,4 @@
+import 'package:dope_ticket/commons/labels.dart';
 import 'package:flutter/material.dart';
 
 class Baggage extends StatefulWidget {
@@ -18,7 +19,7 @@ class BaggageState extends State<Baggage> {
         Container(
           alignment: Alignment.topLeft,
           child: Text(
-            'Baggage',
+            L.baggage,
             style: TextStyle(
               fontSize: 20,
             ),
@@ -26,7 +27,7 @@ class BaggageState extends State<Baggage> {
         ),
         RadioListTile<int>(
           selected: true,
-          title: const Text('15 Kg'),
+          title: const Text(L.kg_15),
           value: 15,
           groupValue: _value,
           onChanged: (val) {
@@ -36,7 +37,7 @@ class BaggageState extends State<Baggage> {
           },
         ),
         RadioListTile<int>(
-          title: const Text('20 Kg'),
+          title: const Text(L.kg_20),
           value: 20,
           groupValue: _value,
           onChanged: (val) {
@@ -46,7 +47,7 @@ class BaggageState extends State<Baggage> {
           },
         ),
         RadioListTile<int>(
-          title: const Text('25 Kg'),
+          title: const Text(L.kg_25),
           value: 25,
           groupValue: _value,
           onChanged: (val) {
@@ -56,7 +57,7 @@ class BaggageState extends State<Baggage> {
           },
         ),
         RadioListTile<int>(
-          title: const Text('30 Kg'),
+          title: const Text(L.kg_30),
           value: 30,
           groupValue: _value,
           onChanged: (val) {
@@ -68,4 +69,6 @@ class BaggageState extends State<Baggage> {
       ],
     );
   }
+
+  String? get validate => _value.toString();
 }

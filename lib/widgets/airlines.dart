@@ -1,3 +1,4 @@
+import 'package:dope_ticket/commons/labels.dart';
 import 'package:flutter/material.dart';
 
 class AirLines extends StatefulWidget {
@@ -8,7 +9,7 @@ class AirLines extends StatefulWidget {
 }
 
 class AirLinesState extends State<AirLines> {
-  String _value = 'One Way';
+  String _value = L.one_way;
 
   @override
   Widget build(BuildContext context) {
@@ -19,15 +20,15 @@ class AirLinesState extends State<AirLines> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           const Text(
-            'Airlines',
+            L.airlines,
             style: TextStyle(
               fontSize: 21,
             ),
           ),
           RadioListTile<String>(
             selected: true,
-            title: const Text('One Way'),
-            value: 'One Way',
+            title: const Text(L.one_way),
+            value: L.one_way,
             groupValue: _value,
             onChanged: (val) {
               setState(() {
@@ -36,8 +37,8 @@ class AirLinesState extends State<AirLines> {
             },
           ),
           RadioListTile<String>(
-            title: const Text('Return'),
-            value: 'Return',
+            title: const Text(L.return_),
+            value: L.return_,
             groupValue: _value,
             onChanged: (val) {
               setState(() {
@@ -49,4 +50,6 @@ class AirLinesState extends State<AirLines> {
       ),
     );
   }
+
+  String? get validate => _value;
 }

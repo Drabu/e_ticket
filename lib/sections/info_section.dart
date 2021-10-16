@@ -1,3 +1,4 @@
+import 'package:dope_ticket/commons/labels.dart';
 import 'package:flutter/material.dart';
 
 import 'package:dope_ticket/commons/default_validator.dart';
@@ -34,7 +35,7 @@ class TicketHolderDetailsState extends State<TicketHolderDetails> {
             validator: defaultValidator,
             controller: widget._nameController,
             decoration: InputDecoration(
-              hintText: 'Name',
+              hintText: L.name,
             ),
           ),
           PassengersList(),
@@ -53,9 +54,7 @@ class TicketHolderDetailsState extends State<TicketHolderDetails> {
                 context: context,
               );
             },
-            decoration: InputDecoration(
-              hintText: 'Date of birth',
-            ),
+            decoration: InputDecoration(hintText: L.date_of_birth),
           ),
           Row(
             children: [
@@ -64,7 +63,7 @@ class TicketHolderDetailsState extends State<TicketHolderDetails> {
                   controller: widget._pnrController,
                   validator: defaultValidator,
                   decoration: InputDecoration(
-                    hintText: 'PNR',
+                    hintText: L.pnr,
                   ),
                 ),
               ),
@@ -73,7 +72,7 @@ class TicketHolderDetailsState extends State<TicketHolderDetails> {
                   controller: widget._ticketNumberController,
                   validator: defaultValidator,
                   decoration: InputDecoration(
-                    hintText: 'Ticket no',
+                    hintText: L.ticket_no,
                   ),
                 ),
               ),
@@ -100,7 +99,7 @@ class TicketHolderDetailsState extends State<TicketHolderDetails> {
                     );
                   },
                   decoration: InputDecoration(
-                    hintText: 'Date',
+                    hintText: L.date,
                   ),
                 ),
               ),
@@ -109,7 +108,7 @@ class TicketHolderDetailsState extends State<TicketHolderDetails> {
                   controller: widget._timingsController,
                   validator: defaultValidator,
                   decoration: InputDecoration(
-                    hintText: 'Timings',
+                    hintText: L.timings,
                   ),
                 ),
               ),

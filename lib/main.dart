@@ -3,6 +3,7 @@ import 'package:dope_ticket/widgets/refundable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'commons/labels.dart';
 import 'sections/airline_type.dart';
 import 'widgets/airlines.dart';
 import 'widgets/baggage.dart';
@@ -18,18 +19,25 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'e-Ticket',
+      title: L.e_ticket,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'e-Ticket'),
+      home: MyHomePage(title: L.e_ticket),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  MyHomePage({Key? key, required this.title}) : super(key: key);
 
+  final _bookingDetailsKey = GlobalKey<BookkingDetailsState>();
+  final _ticketHolderKey = GlobalKey<TicketHolderDetailsState>();
+  final _airlineTypeKey = GlobalKey<AirLineTypeState>();
+
+  final _airlineKey = GlobalKey<AirLinesState>();
+  final _refunadbleSectionKey = GlobalKey<RefundableState>();
+  final _baggageSectionKey = GlobalKey<BaggageState>();
   final String title;
 
   @override
@@ -37,13 +45,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final _airlineKey = GlobalKey<AirLinesState>();
-  final _airlineTypeKey = GlobalKey<AirLineTypeState>();
-  final _ticketHolderKey = GlobalKey<TicketHolderDetailsState>();
-  final _refunadbleSectionKey = GlobalKey<RefundableState>();
-  final _baggageSectionKey = GlobalKey<BaggageState>();
-  final _bookingDetailsKey = GlobalKey<BookkingDetailsState>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,22 +57,22 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             children: [
               AirLines(
-                key: _airlineKey,
+                key: widget._airlineKey,
               ),
               AirLineType(
-                key: _airlineTypeKey,
+                key: widget._airlineTypeKey,
               ),
               TicketHolderDetails(
-                key: _ticketHolderKey,
+                key: widget._ticketHolderKey,
               ),
               Refundable(
-                key: _refunadbleSectionKey,
+                key: widget._refunadbleSectionKey,
               ),
               Baggage(
-                key: _baggageSectionKey,
+                key: widget._baggageSectionKey,
               ),
               BookingDetails(
-                key: _bookingDetailsKey,
+                key: widget._bookingDetailsKey,
               ),
               Container(
                 margin: EdgeInsets.only(top: 10, bottom: 10),
@@ -81,11 +82,15 @@ class _MyHomePageState extends State<MyHomePage> {
                       flex: 1,
                       child: ElevatedButton(
                         onPressed: () {
-                          print(_bookingDetailsKey.currentState!.validate.toString());
-                          print(_ticketHolderKey.currentState!.validate.toString());
-                          print(_airlineTypeKey.currentState!.validate.toString());
+                          print(widget._bookingDetailsKey.currentState!.validate.toString());
+                          print(widget._ticketHolderKey.currentState!.validate.toString());
+                          print(widget._airlineTypeKey.currentState!.validate.toString());
+
+                          print(widget._refunadbleSectionKey.currentState!.validate.toString());
+                          print(widget._baggageSectionKey.currentState!.validate.toString());
+                          print(widget._airlineKey.currentState!.validate.toString());
                         },
-                        child: Text('Submit'),
+                        child: Text(L.submit),
                       ),
                     ),
                   ],
