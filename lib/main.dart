@@ -80,6 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: ElevatedButton(
                       onPressed: () {
                         print(_bookingDetailsKey.currentState!.validate.toString());
+                        print(_ticketHolderKey.currentState!.validate.toString());
                       },
                       child: Text('Submit'),
                     ),

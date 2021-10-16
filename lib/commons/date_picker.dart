@@ -11,7 +11,6 @@ void showCustomDateDialog({
     firstDate: DateTime.now(),
     lastDate: DateTime(2030),
   ).then((date) {
-    callback(date);
+    if (date != null) callback(date);
   });
 }
-
