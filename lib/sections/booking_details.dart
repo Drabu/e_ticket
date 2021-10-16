@@ -1,5 +1,6 @@
 import 'package:dope_ticket/commons/default_validator.dart';
 import 'package:dope_ticket/commons/labels.dart';
+import 'package:dope_ticket/models/booking_details_model.dart';
 import 'package:flutter/material.dart';
 
 import '../commons/date_picker.dart';
@@ -84,15 +85,4 @@ class BookkingDetailsState extends State<BookingDetails> {
   }
 }
 
-class BookingDetailsHolder {
-  int grandTotal;
-  String bookingDate;
-  String referrenceNumber;
-  String bookingId;
-  BookingDetailsHolder({
-    required this.grandTotal,
-    required this.bookingDate,
-    required this.referrenceNumber,
-    required this.bookingId,
-  });
-}
+

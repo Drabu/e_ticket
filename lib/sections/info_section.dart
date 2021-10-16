@@ -1,4 +1,5 @@
 import 'package:dope_ticket/commons/labels.dart';
+import 'package:dope_ticket/models/ticket_holder_model.dart';
 import 'package:flutter/material.dart';
 
 import 'package:dope_ticket/commons/default_validator.dart';
@@ -13,6 +14,7 @@ class TicketHolderDetails extends StatefulWidget {
   final _ticketNumberController = TextEditingController();
   final _pnrController = TextEditingController();
   final _nameController = TextEditingController();
+  final _passengerListKey = GlobalKey<PassengersListState>();
   final _formKey = GlobalKey<FormState>();
 
   TicketHolderDetails({required Key key}) : super(key: key);
@@ -38,7 +40,7 @@ class TicketHolderDetailsState extends State<TicketHolderDetails> {
               hintText: L.name,
             ),
           ),
-          PassengersList(),
+          PassengersList(key: widget._passengerListKey),
           TextFormField(
             validator: defaultValidator,
             controller: widget._dateOfBirthEditingController,
@@ -128,28 +130,10 @@ class TicketHolderDetailsState extends State<TicketHolderDetails> {
         pnr: widget._pnrController.text,
         ticketNumber: widget._ticketNumberController.text,
         timings: widget._timingsController.text,
-        passsengerList: [],
+        passsengerList: widget._passengerListKey.currentState?.passengerList ?? [],
       );
     return null;
   }
 }
 
-class TicketHolderDetailsHolder {
-  String timings;
-  String date;
-  String ticketNumber;
-  String dateOfBirth;
-  String pnr;
-  String name;
-  List<Passenger> passsengerList;
 
-  TicketHolderDetailsHolder({
-    required this.timings,
-    required this.date,
-    required this.ticketNumber,
-    required this.dateOfBirth,
-    required this.name,
-    required this.pnr,
-    required this.passsengerList,
-  });
-}

@@ -1,4 +1,5 @@
 import 'package:dope_ticket/commons/labels.dart';
+import 'package:dope_ticket/models/passenger_model.dart';
 
 import '../routes/add_passengar.dart';
 
@@ -6,7 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class PassengersList extends StatefulWidget {
-  PassengersList({Key? key}) : super(key: key);
+  PassengersList({required GlobalKey? key}) : super(key: key);
 
   @override
   PassengersListState createState() => PassengersListState();
@@ -14,11 +15,6 @@ class PassengersList extends StatefulWidget {
 
 class PassengersListState extends State<PassengersList> {
   List<Passenger> passengerList = [];
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -87,17 +83,3 @@ class PassengersListState extends State<PassengersList> {
   }
 }
 
-class Passenger {
-  static const MALE = 'M';
-  static const FEMALE = 'F';
-
-  final String passengerFirstName;
-  final String passengerLastName;
-  final String gender;
-
-  Passenger({
-    required this.passengerFirstName,
-    required this.passengerLastName,
-    required this.gender,
-  });
-}
