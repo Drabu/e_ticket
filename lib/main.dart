@@ -137,6 +137,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Flexible(
                     child: TextFormField(
@@ -168,10 +170,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
               Refundable(UniqueKey()),
-              Text(
-                'Baggage',
-                style: TextStyle(
-                  fontSize: 20,
+              Container(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  'Baggage',
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
                 ),
               ),
               Baggage(

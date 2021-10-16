@@ -22,18 +22,21 @@ class PassengersListState extends State<PassengersList> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ElevatedButton(
-          onPressed: () async {
-            var res = await Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => AddPassengerPage(),
-              ),
-            );
-            passengerList.add(res);
-            setState(() {});
-          },
-          child: Text('Add Passengar'),
+        Container(
+          alignment: Alignment.topRight,
+          child: ElevatedButton(
+            onPressed: () async {
+              var res = await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => AddPassengerPage(),
+                ),
+              );
+              passengerList.add(res);
+              setState(() {});
+            },
+            child: Text('Add Passengar'),
+          ),
         ),
         ...passengerList.map((e) {
           return Container(
@@ -41,7 +44,7 @@ class PassengersListState extends State<PassengersList> {
             child: Row(
               children: [
                 Flexible(
-                  flex: 1,
+                  flex: 2,
                   child: Text(e.gender.toString()),
                 ),
                 SizedBox(
@@ -63,12 +66,14 @@ class PassengersListState extends State<PassengersList> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    // passengerList.remove(e);
+                    passengerList.remove(e);
                     setState(() {});
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 5),
-                    child: Text('Remove'),
+                    child: Icon(
+                      Icons.remove,
+                    ),
                   ),
                 )
               ],
