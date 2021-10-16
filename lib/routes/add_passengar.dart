@@ -1,4 +1,4 @@
-import 'package:dope_ticket/passenger_widget.dart';
+import 'package:dope_ticket/sections/passenger_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

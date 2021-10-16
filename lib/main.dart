@@ -1,6 +1,14 @@
-import 'package:dope_ticket/passenger_widget.dart';
+import 'package:dope_ticket/sections/booking_details.dart';
+import 'package:dope_ticket/sections/passenger_widget.dart';
+import 'package:dope_ticket/sections/refundable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'sections/airline_type.dart';
+import 'sections/airlines.dart';
+import 'sections/baggage.dart';
+import 'commons/date_picker.dart';
+import 'sections/info_section.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,6 +39,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final _airlineKey = GlobalKey<AirLinesState>();
+  final _airlineTypeKey = GlobalKey<AirLineTypeState>();
+  final _ticketHolderKey = GlobalKey<TicketHolderDetailsState>();
+  final _refunadbleSectionKey = GlobalKey<RefundableState>();
+  final _baggageSectionKey = GlobalKey<BaggageState>();
+  final _bookingDetailsKey = GlobalKey<BookkingDetailsState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,356 +58,26 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             children: [
               AirLines(
-                UniqueKey(),
+                _airlineKey,
               ),
-              Row(
-                children: [
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Text(
-                    'GoAir',
-                    style: TextStyle(
-                      fontSize: 15,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Container(
-                    width: 150,
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        hintText: 'Flight No.',
-                      ),
-                    ),
-                  ),
-                ],
+              AirLineType(
+                key: _airlineTypeKey,
               ),
-              Row(
-                children: [
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Text(
-                    'Indigo',
-                    style: TextStyle(
-                      fontSize: 15,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Container(
-                    width: 150,
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        hintText: 'Flight No.',
-                      ),
-                    ),
-                  ),
-                ],
+              TicketHolderDetails(
+                key: _ticketHolderKey,
               ),
-              //===============
-              TextFormField(
-                decoration: InputDecoration(
-                  hintText: 'Name',
-                ),
-              ),
-              PassengersList(),
-              TextFormField(
-                onTap: () {
-                  showDatePicker(
-                          context: context,
-                          // initialDate: _dateTime == null ? DateTime.now() : _dateTime,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime.now(),
-                          lastDate: DateTime(2030))
-                      .then((date) {
-                    setState(() {
-                      // _dateTime = date;
-                    });
-                  });
-                },
-                decoration: InputDecoration(
-                  hintText: 'Date of birth',
-                ),
-              ),
-              Row(
-                children: [
-                  Flexible(
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        hintText: 'PNR',
-                      ),
-                    ),
-                  ),
-                  Flexible(
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        hintText: 'Ticket no',
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Flexible(
-                    child: TextFormField(
-                      onTap: () {
-                        showDatePicker(
-                                context: context,
-                                // initialDate: _dateTime == null ? DateTime.now() : _dateTime,
-                                initialDate: DateTime.now(),
-                                firstDate: DateTime.now(),
-                                lastDate: DateTime(2030))
-                            .then((date) {
-                          setState(() {
-                            // _dateTime = date;
-                          });
-                        });
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Date',
-                      ),
-                    ),
-                  ),
-                  Flexible(
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        hintText: 'Timings',
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Refundable(UniqueKey()),
-              Container(
-                alignment: Alignment.topLeft,
-                child: Text(
-                  'Baggage',
-                  style: TextStyle(
-                    fontSize: 20,
-                  ),
-                ),
+              Refundable(
+                key: _refunadbleSectionKey,
               ),
               Baggage(
-                UniqueKey(),
+                key: _baggageSectionKey,
               ),
-              Column(
-                children: [
-                  TextFormField(
-                    decoration: InputDecoration(
-                      hintText: 'Booking Id',
-                    ),
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      hintText: 'Reference no',
-                    ),
-                  ),
-                  TextFormField(
-                    onTap: () {
-                      showDatePicker(
-                              context: context,
-                              // initialDate: _dateTime == null ? DateTime.now() : _dateTime,
-                              initialDate: DateTime.now(),
-                              firstDate: DateTime.now(),
-                              lastDate: DateTime(2030))
-                          .then((date) {
-                        setState(() {
-                          // _dateTime = date;
-                        });
-                      });
-                    },
-                    decoration: InputDecoration(
-                      hintText: 'Booking Date',
-                    ),
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      hintText: 'Grand Total',
-                    ),
-                  ),
-                ],
+              BookingDetails(
+                key: _bookingDetailsKey,
               ),
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class AirLines extends StatefulWidget {
-  const AirLines(Key key) : super(key: key);
-
-  @override
-  AirLinesState createState() => AirLinesState();
-}
-
-class AirLinesState extends State<AirLines> {
-  int _value = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          const Text(
-            'Airlines',
-            style: TextStyle(
-              fontSize: 21,
-            ),
-          ),
-          RadioListTile<int>(
-            title: const Text('One Way'),
-            value: 1,
-            groupValue: _value,
-            onChanged: (val) {
-              setState(() {
-                _value = val!;
-              });
-            },
-          ),
-          RadioListTile<int>(
-            title: const Text('Return'),
-            value: 2,
-            groupValue: _value,
-            onChanged: (val) {
-              setState(() {
-                _value = val!;
-              });
-            },
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class Baggage extends StatefulWidget {
-  const Baggage(Key key) : super(key: key);
-
-  @override
-  BaggageState createState() => BaggageState();
-}
-
-class BaggageState extends State<Baggage> {
-  int _value = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        RadioListTile<int>(
-          title: const Text('15 Kg'),
-          value: 1,
-          groupValue: _value,
-          onChanged: (val) {
-            setState(() {
-              _value = val!;
-            });
-          },
-        ),
-        RadioListTile<int>(
-          title: const Text('20 Kg'),
-          value: 2,
-          groupValue: _value,
-          onChanged: (val) {
-            setState(() {
-              _value = val!;
-            });
-          },
-        ),
-        RadioListTile<int>(
-          title: const Text('25 Kg'),
-          value: 3,
-          groupValue: _value,
-          onChanged: (val) {
-            setState(() {
-              _value = val!;
-            });
-          },
-        ),
-        RadioListTile<int>(
-          title: const Text('30 Kg'),
-          value: 4,
-          groupValue: _value,
-          onChanged: (val) {
-            setState(() {
-              _value = val!;
-            });
-          },
-        ),
-      ],
-    );
-  }
-}
-
-class Refundable extends StatefulWidget {
-  const Refundable(Key key) : super(key: key);
-
-  @override
-  RefundableState createState() => RefundableState();
-}
-
-class RefundableState extends State<Refundable> {
-  int _value = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(
-        top: 10,
-        bottom: 10,
-      ),
-      child: Row(
-        children: <Widget>[
-          Flexible(
-            flex: 2,
-            child: RadioListTile<int>(
-              title: const Text(
-                'Refund',
-                style: TextStyle(
-                  fontSize: 15,
-                ),
-              ),
-              value: 1,
-              groupValue: _value,
-              onChanged: (val) {
-                setState(() {
-                  _value = val!;
-                });
-              },
-            ),
-          ),
-          Flexible(
-            flex: 3,
-            child: RadioListTile<int>(
-              title: const Text(
-                'Non Refunded',
-                style: TextStyle(
-                  fontSize: 15,
-                ),
-              ),
-              value: 2,
-              groupValue: _value,
-              onChanged: (val) {
-                setState(() {
-                  _value = val!;
-                });
-              },
-            ),
-          ),
-        ],
       ),
     );
   }

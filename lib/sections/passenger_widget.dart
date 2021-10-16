@@ -1,4 +1,4 @@
-import 'add_passengar.dart';
+import '../routes/add_passengar.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
