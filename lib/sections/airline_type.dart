@@ -1,3 +1,4 @@
+import 'package:dope_ticket/commons/default_validator.dart';
 import 'package:flutter/material.dart';
 
 class AirLineType extends StatefulWidget {
@@ -29,6 +30,7 @@ class AirLineTypeState extends State<AirLineType> {
             Container(
               width: 150,
               child: TextFormField(
+                validator: defaultValidator,
                 decoration: InputDecoration(
                   hintText: 'Flight No.',
                 ),
@@ -53,6 +55,7 @@ class AirLineTypeState extends State<AirLineType> {
             Container(
               width: 150,
               child: TextFormField(
+                validator: defaultValidator,
                 decoration: InputDecoration(
                   hintText: 'Flight No.',
                 ),

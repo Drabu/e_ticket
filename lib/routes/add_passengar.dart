@@ -1,3 +1,4 @@
+import 'package:dope_ticket/commons/default_validator.dart';
 import 'package:dope_ticket/sections/passenger_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -43,12 +44,14 @@ class _AddPassengerPageState extends State<AddPassengerPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TextFormField(
+                validator: defaultValidator,
                 controller: firstNameController,
                 decoration: InputDecoration(
                   hintText: 'Passenger First Name',
                 ),
               ),
               TextFormField(
+                validator: defaultValidator,
                 controller: lastNameController,
                 decoration: InputDecoration(
                   hintText: 'Passenger Last Name',

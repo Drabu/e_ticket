@@ -1,3 +1,4 @@
+import 'package:dope_ticket/commons/default_validator.dart';
 import 'package:dope_ticket/sections/passenger_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -22,12 +23,14 @@ class TicketHolderDetailsState extends State<TicketHolderDetails> {
     return Column(
       children: [
         TextFormField(
+          validator: defaultValidator,
           decoration: InputDecoration(
             hintText: 'Name',
           ),
         ),
         PassengersList(),
         TextFormField(
+          validator: defaultValidator,
           controller: _dateOfBirthEditingController,
           onTap: () {
             showCustomDateDialog(
@@ -50,6 +53,7 @@ class TicketHolderDetailsState extends State<TicketHolderDetails> {
           children: [
             Flexible(
               child: TextFormField(
+                validator: defaultValidator,
                 decoration: InputDecoration(
                   hintText: 'PNR',
                 ),
@@ -57,6 +61,7 @@ class TicketHolderDetailsState extends State<TicketHolderDetails> {
             ),
             Flexible(
               child: TextFormField(
+                validator: defaultValidator,
                 decoration: InputDecoration(
                   hintText: 'Ticket no',
                 ),
@@ -70,6 +75,7 @@ class TicketHolderDetailsState extends State<TicketHolderDetails> {
           children: [
             Flexible(
               child: TextFormField(
+                validator: defaultValidator,
                 controller: _dateOfFlightEditingController,
                 onTap: () {
                   showCustomDateDialog(
@@ -90,6 +96,7 @@ class TicketHolderDetailsState extends State<TicketHolderDetails> {
             ),
             Flexible(
               child: TextFormField(
+                validator: defaultValidator,
                 decoration: InputDecoration(
                   hintText: 'Timings',
                 ),
