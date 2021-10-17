@@ -1,10 +1,12 @@
-import 'dart:html' as html;
+import 'dart:io';
+
 import 'package:dope_ticket/widgets/print_layout.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dope_ticket/sections/booking_details.dart';
 import 'package:dope_ticket/widgets/refundable.dart';
-import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:share_plus/share_plus.dart';
 import 'commons/labels.dart';
 import 'models/e_ticket_model.dart';
 import 'sections/airline_type.dart';
@@ -42,50 +44,7 @@ class Sample extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: ElevatedButton(
-          onPressed: () async {
-            final pdf = pw.Document();
-
-            final font = await rootBundle.load("fonts/OpenSans-Regular.ttf");
-            final ttf = pw.Font.ttf(font);
-            final fontBold = await rootBundle.load("fonts/OpenSans-Bold.ttf");
-            final ttfBold = pw.Font.ttf(fontBold);
-            final fontItalic = await rootBundle.load("fonts/OpenSans-Italic.ttf");
-            final ttfItalic = pw.Font.ttf(fontItalic);
-            final fontBoldItalic = await rootBundle.load("fonts/OpenSans-BoldItalic.ttf");
-            final ttfBoldItalic = pw.Font.ttf(fontBoldItalic);
-
-            pdf.addPage(
-              pw.Page(
-                theme: pw.ThemeData.withFont(
-                  base: ttf,
-                  bold: ttfBold,
-                  italic: ttfItalic,
-                  boldItalic: ttfBoldItalic,
-                ),
-                pageFormat: PdfPageFormat.a4,
-                build: (pw.Context context) {
-                  return printLayout(); // Center
-                },
-              ),
-            );
-
-            final bytes = await pdf.save();
-            final blob = html.Blob([bytes], 'application/pdf');
-            final url = html.Url.createObjectUrlFromBlob(blob);
-
-            final anchor = html.document.createElement('a') as html.AnchorElement
-              ..href = url
-              ..style.display = 'none'
-              ..download = 'report_.pdf';
-            html.document.body?.children.add(anchor);
-
-            // download
-            anchor.click();
-
-            // cleanup
-            html.document.body?.children.remove(anchor);
-            html.Url.revokeObjectUrl(url);
-          },
+          onPressed: () async {},
           child: Text('Generate'),
         ),
       ),
@@ -140,7 +99,7 @@ class MyHomePage extends StatelessWidget {
                     Expanded(
                       flex: 1,
                       child: ElevatedButton(
-                        onPressed: () {
+                        onPressed: () async {
                           final _airlineResult = _airlineKey.currentState!.validate;
                           final _airlineTypeResult = _airlineTypeKey.currentState!.validate;
                           final _ticketHandlerResult = _ticketHolderKey.currentState!.validate;
@@ -148,22 +107,20 @@ class MyHomePage extends StatelessWidget {
                           final _baggageResult = _baggageSectionKey.currentState!.validate;
                           final _bookingDetailsResult = _bookingDetailsKey.currentState!.validate;
 
-                          if (notNull(_airlineResult) &&
-                              notNull(_airlineTypeResult) &&
-                              notNull(_ticketHandlerResult) &&
-                              notNull(_refunadbleResult) &&
-                              notNull(_baggageResult) &&
-                              notNull(_bookingDetailsResult)) {
-                            print("Unbelievable!");
-
-                            ETicketModel(
+                          if (_notNull(_airlineResult) &&
+                              _notNull(_airlineTypeResult) &&
+                              _notNull(_ticketHandlerResult) &&
+                              _notNull(_refunadbleResult) &&
+                              _notNull(_baggageResult) &&
+                              _notNull(_bookingDetailsResult)) {
+                            await _createAndSharePDF(ETicketModel(
                               airline: _airlineResult!,
                               airLineType: _airlineTypeResult!,
                               ticketHolderDetails: _ticketHandlerResult!,
                               refundable: _refunadbleResult!,
                               baggage: _baggageResult!,
                               bookingDetails: _bookingDetailsResult!,
-                            );
+                            ));
                           }
                         },
                         child: Text(L.submit),
@@ -179,5 +136,26 @@ class MyHomePage extends StatelessWidget {
     );
   }
 
-  bool notNull(dynamic val) => val != null;
+  bool _notNull(dynamic val) => val != null;
+
+  Future<bool> _createAndSharePDF(ETicketModel model) async {
+    final pdf = pw.Document();
+    pdf.addPage(
+      pw.Page(
+        pageFormat: PdfPageFormat.a4,
+        build: (pw.Context context) {
+          return printLayout(model); // Center
+        },
+      ),
+    );
+    WidgetsFlutterBinding.ensureInitialized();
+    final String dir = (await getApplicationDocumentsDirectory()).path;
+    final String path = '$dir/e_ticket.pdf';
+    final file = File(path);
+    return await file.writeAsBytes(await pdf.save()).then((value) {
+      return Share.shareFiles(['${value.path}'], text: 'Great picture')
+          .then((value) => true)
+          .catchError((onError) => false);
+    }).catchError((onError) => false);
+  }
 }
