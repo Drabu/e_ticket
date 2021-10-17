@@ -8,6 +8,7 @@ class L {
   static const first_name = 'First Name';
   static const last_name = 'Last Name';
   static const add_passenger = 'Add Passenger';
+  static const passenger = 'Passengers';
   static const go_air = 'GoAir';
   static const flight_no = 'Flight No.';
   static const indigo = 'IndiGo';
@@ -23,8 +24,7 @@ class L {
   static const ticket_no = 'Ticket no';
   static const date = 'Date';
   static const timings = 'Timings';
-  
-  
+
   static const one_way = 'One Way';
   static const airlines = 'Airlines';
   static const return_ = 'Return';
@@ -38,14 +38,4 @@ class L {
   static const non_refunded = 'Non Refunded';
   static const refund = 'Refund';
   static const refundable = 'Refundable';
-
-
-
-
-  
-  
-  
-
-  
-  
 }

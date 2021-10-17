@@ -1,0 +1,30 @@
+[
+  {
+    "family": "Europa",
+    "fonts": [
+      
+      { "asset": "fonts/EuropaRegular.ttf" }
+      
+    ]
+  },
+  {
+    "family": "OpenSans",
+    "fonts": [
+        {"asset": "fonts/OpenSans-Bold.ttf"},
+        { "asset": "fonts/OpenSans-BoldItalic.ttf" },
+        { "asset": "fonts/OpenSans-Italic.ttf" },
+        { "asset": "fonts/OpenSans-Regular.ttf" }
+    ]
+},
+{
+"family": "MavenPro",
+"fonts": [
+  {
+    "asset": "fonts/MavenPro-Regular.ttf",
+    "weight": 400
+  },
+  { "asset": "fonts/MavenPro-Medium.ttf", "weight": 500 },
+  { "asset": "fonts/MavenPro-Bold.ttf", "weight": 700 }
+]
+}
+]
