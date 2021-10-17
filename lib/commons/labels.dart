@@ -38,4 +38,7 @@ class L {
   static const non_refunded = 'Non Refunded';
   static const refund = 'Refund';
   static const refundable = 'Refundable';
+
+  static const storage_access = 'Please Allow storage permissions';
+  static const okay = 'Okay!';
 }

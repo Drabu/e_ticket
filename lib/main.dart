@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:dope_ticket/sections/booking_details.dart';
 import 'package:dope_ticket/widgets/refundable.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:share_plus/share_plus.dart';
 import 'commons/labels.dart';
 import 'models/e_ticket_model.dart';
@@ -31,8 +32,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      // home: MyHomePage(title: L.e_ticket),
-      home: Sample(),
+      home: MyHomePage(title: L.e_ticket),
+      // home: Sample(),
     );
   }
 }
@@ -100,6 +101,29 @@ class MyHomePage extends StatelessWidget {
                       flex: 1,
                       child: ElevatedButton(
                         onPressed: () async {
+                          var status = await Permission.storage.status;
+                          var isRestricted = await Permission.storage.isRestricted;
+                          if (status.isDenied || isRestricted) {
+                            await [
+                              Permission.storage,
+                            ].request();
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(title: Text(L.storage_access), actions: [
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text(
+                                        L.okay,
+                                      ),
+                                    )
+                                  ]);
+                                });
+                            return;
+                          }
+
                           final _airlineResult = _airlineKey.currentState!.validate;
                           final _airlineTypeResult = _airlineTypeKey.currentState!.validate;
                           final _ticketHandlerResult = _ticketHolderKey.currentState!.validate;
