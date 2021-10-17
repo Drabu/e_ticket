@@ -30,10 +30,12 @@ class BookkingDetailsState extends State<BookingDetails> {
           Column(
             children: [
               TextFormField(
+                controller: _bookingIdController,
                 validator: defaultValidator,
                 decoration: InputDecoration(hintText: L.booking_id),
               ),
               TextFormField(
+                controller: _referrenceNumberController,
                 validator: defaultValidator,
                 decoration: InputDecoration(hintText: L.refference_no),
               ),
@@ -84,5 +86,3 @@ class BookkingDetailsState extends State<BookingDetails> {
     return null;
   }
 }
-
-

@@ -38,21 +38,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class Sample extends StatelessWidget {
-  final pdf = pw.Document();
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () async {},
-          child: Text('Generate'),
-        ),
-      ),
-    );
-  }
-}
-
 class MyHomePage extends StatelessWidget {
   MyHomePage({Key? key, required this.title});
 
@@ -174,10 +159,10 @@ class MyHomePage extends StatelessWidget {
     );
     WidgetsFlutterBinding.ensureInitialized();
     final String dir = (await getApplicationDocumentsDirectory()).path;
-    final String path = '$dir/e_ticket.pdf';
+    final String path = '$dir/eTicket.pdf';
     final file = File(path);
     return await file.writeAsBytes(await pdf.save()).then((value) {
-      return Share.shareFiles(['${value.path}'], text: 'Great picture')
+      return Share.shareFiles(['${value.path}'], text: 'eTicket')
           .then((value) => true)
           .catchError((onError) => false);
     }).catchError((onError) => false);

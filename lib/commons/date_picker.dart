@@ -8,7 +8,7 @@ void showCustomDateDialog({
   showDatePicker(
     context: context,
     initialDate: initialDate ?? DateTime.now(),
-    firstDate: DateTime.now(),
+    firstDate: DateTime(1800),
     lastDate: DateTime(2030),
   ).then((date) {
     if (date != null) callback(date);
