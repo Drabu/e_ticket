@@ -1,47 +1,9 @@
 import 'package:dope_ticket/commons/labels.dart';
-import 'package:dope_ticket/models/booking_details_model.dart';
 import 'package:dope_ticket/models/e_ticket_model.dart';
 import 'package:dope_ticket/models/passenger_model.dart';
-import 'package:dope_ticket/models/ticket_holder_model.dart';
-import 'package:dope_ticket/sections/airline_type.dart';
 import 'package:pdf/widgets.dart';
 
 dynamic printLayout(ETicketModel model) {
-  // ETicketModel model = ETicketModel(
-  //     airLineType: AirLineTypeHolder(
-  //       goAirFlightNumber: '123',
-  //       indigoFlightNumber: '456',
-  //     ),
-  //     airline: 'Return',
-  //     baggage: '15 Kg',
-  //     refundable: 'Non Refundable',
-  //     bookingDetails: BookingDetailsHolder(
-  //       bookingDate: '25 09 1996',
-  //       bookingId: '25091996',
-  //       grandTotal: 100,
-  //       referrenceNumber: '5091996',
-  //     ),
-  //     ticketHolderDetails: TicketHolderDetailsHolder(
-  //       date: '15 09 1996',
-  //       dateOfBirth: '25 09 1996',
-  //       name: 'Burhan ud din',
-  //       passsengerList: [
-  //         Passenger(
-  //           gender: 'M',
-  //           passengerFirstName: 'Jon ahmad',
-  //           passengerLastName: 'Doe',
-  //         ),
-  //         Passenger(
-  //           gender: 'M',
-  //           passengerFirstName: 'Jon ahmad',
-  //           passengerLastName: 'Doe',
-  //         ),
-  //       ],
-  //       pnr: '91996',
-  //       ticketNumber: '96',
-  //       timings: '4PM',
-  //     ));
-
   return Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     mainAxisAlignment: MainAxisAlignment.start,
